@@ -1,0 +1,63 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# --- IDE / Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS trash ---
+.DS_Store
+Thumbs.db
+
+# --- Data ---
+data/raw/
+data/processed/*.pt
+data/processed/metadata.json
+!data/processed/.gitkeep   # если хочешь папку в git без файлов
+
+# --- Models ---
+models/*.pt
+models/*.pth
+models/*.onnx
+!models/.gitkeep
+
+# --- Logs / Runs ---
+logs/
+mlruns/
+wandb/
+tensorboard/
+*.log
+
+# --- Airflow ---
+services/airflow/logs/
+services/airflow/plugins/
+airflow.db
+airflow.cfg
+
+# --- Docker ---
+*.pid
+*.sock
+*.tar
+.dockerignore
+
+# --- Cache / Temp ---
+*.tmp
+*.bak
+*.out
+*.lock
+
+# --- Jupyter ---
+.profile
+.jupyter/
