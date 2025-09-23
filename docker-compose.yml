@@ -1,30 +1,31 @@
 services:
-  prepare:
+  pipeline:
     build: ./src/prepare
     volumes:
-      - ./src/prepare:/app/src/prepare
+      - ./data:/app/data
+      - ./model:/app/model
+      - ./src:/app/src
     command: >
       sh -c "
-        if [ ! -f src/prepare/dataset/train.pt ] || [ ! -f src/prepare/dataset/test.pt ]; then
-          echo '===> Generating dataset...';
-          python src/prepare/dataset/data_processing.py;
-        else
-          echo '===> Dataset already exists';
-        fi &&
-        if [ ! -f src/prepare/model/simple_nn.pth ]; then
-          echo '===> Training model...';
-          python src/prepare/model/model.py;
-        else
-          echo '===> Model already exists';
-        fi
+        echo '===> Running data stage (raw)...' &&
+        python src/prepare/dataset/data_processing.py --raw &&
+        echo '===> Running data stage (process)...' &&
+        python src/prepare/dataset/data_processing.py --process &&
+        echo '===> Running model training...' &&
+        python src/prepare/model/train_mlflow.py &&
+        echo '===> Pipeline finished.'
       "
-    restart: "no"
-
+    ports:
+      - "5000:5000"  # для MLflow UI
+    environment:
+      - PYTHONPATH=/app
+    
   api:
     build: ./src/api
     depends_on:
-      - prepare
+      - pipeline
     volumes:
+      - ./model:/app/model
       - ./src/api:/app/src/api
       - ./src/prepare:/app/src/prepare
     command: >

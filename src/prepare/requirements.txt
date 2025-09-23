@@ -1,4 +1,8 @@
 torch
 torchvision
-tensorflow
+tensorflow-datasets
+tensorflow-cpu
 numpy
+opencv-python
+scikit-learn
+mlflow

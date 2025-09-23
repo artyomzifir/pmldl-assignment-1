@@ -25,13 +25,13 @@ class SimpleNN(nn.Module):
         return self.net(x)
 
 
-def load_data_from_files(data_dir="src/prepare/dataset/"):
+def load_data_from_files(data_dir="data/processed"):
     train_data = torch.load(Path(data_dir) / "train.pt")
     test_data = torch.load(Path(data_dir) / "test.pt")
     return train_data, test_data
 
 
-def train_and_save(model_path="src/prepare/model/simple_nn.pth", epochs=5, batch_size=64):
+def train_and_save(model_path="model/simple_nn.pth", epochs=5, batch_size=64):
     device = (
         "cuda" if torch.cuda.is_available()
         else "mps" if torch.backends.mps.is_available()

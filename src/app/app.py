@@ -28,7 +28,6 @@ canvas_result = st_canvas(
 )
 
 def preprocess_to_28x28(rgba: np.ndarray) -> np.ndarray:
-    """Преобразуем canvas в картинку 28x28"""
     rgb = rgba[:, :, :3]
     gray = np.dot(rgb[..., :3], [0.299, 0.587, 0.114]).astype(np.uint8)
     img = Image.fromarray(gray).resize((28, 28), Image.NEAREST)

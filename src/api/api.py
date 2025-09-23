@@ -11,7 +11,7 @@ device = (
     else "cpu"
 )
 
-MODEL_PATH = "src/prepare/model/simple_nn.pth"
+MODEL_PATH = "model/simple_nn.pth"
 model = SimpleNN()
 model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
 model.to(device)

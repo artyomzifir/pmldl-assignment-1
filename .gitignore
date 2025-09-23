@@ -56,7 +56,6 @@ airflow.cfg
 *.tmp
 *.bak
 *.out
-*.lock
 
 # --- Jupyter ---
 .profile
