@@ -36,7 +36,7 @@ The goal is to prepare data, train a simple CNN on MNIST, expose it via a FastAP
 1. Build and start all services:
    ```bash
    docker compose up --build
-````
+   ```
 
 2. Workflow:
 
