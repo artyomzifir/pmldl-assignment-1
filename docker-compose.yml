@@ -1,0 +1,44 @@
+services:
+  prepare:
+    build: ./src/prepare
+    volumes:
+      - ./src/prepare:/app/src/prepare
+    command: >
+      sh -c "
+        if [ ! -f src/prepare/dataset/train.pt ] || [ ! -f src/prepare/dataset/test.pt ]; then
+          echo '===> Generating dataset...';
+          python src/prepare/dataset/data_processing.py;
+        else
+          echo '===> Dataset already exists';
+        fi &&
+        if [ ! -f src/prepare/model/simple_nn.pth ]; then
+          echo '===> Training model...';
+          python src/prepare/model/model.py;
+        else
+          echo '===> Model already exists';
+        fi
+      "
+    restart: "no"
+
+  api:
+    build: ./src/api
+    depends_on:
+      - prepare
+    volumes:
+      - ./src/api:/app/src/api
+      - ./src/prepare:/app/src/prepare
+    command: >
+      uvicorn src.api.api:app --host 0.0.0.0 --port 8085
+    ports:
+      - "8085:8085"
+
+  app:
+    build: ./src/app
+    depends_on:
+      - api
+    volumes:
+      - ./src/app:/app/src/app
+    command: >
+      streamlit run src/app/app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"

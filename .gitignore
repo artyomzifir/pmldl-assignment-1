@@ -61,3 +61,5 @@ airflow.cfg
 # --- Jupyter ---
 .profile
 .jupyter/
+*.pt
+*.pth
