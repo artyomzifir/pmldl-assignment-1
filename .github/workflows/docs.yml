@@ -34,13 +34,9 @@ jobs:
       - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install sphinx
+          pip install sphinx furo
           pip install sphinx-rtd-theme
           pip install myst-parser
-          pip install fastapi pydantic uvicorn
-          pip install torch torchvision
-          pip install streamlit streamlit-drawable-canvas pillow
-          pip install tensorflow numpy
 
       - name: Build HTML
         run: |
