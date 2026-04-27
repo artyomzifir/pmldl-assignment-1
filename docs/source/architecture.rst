@@ -46,9 +46,9 @@ is up. This prevents the inference server from crashing on a missing weights fil
 
    ┌───────────┐   writes artifacts to shared volume   ┌──────────────────┐
    │  prepare  │ ─────────────────────────────────────▶│  simple_nn.pth   │
-   │  (exits)  │                                        │  train.pt        │
-   └───────────┘                                        │  test.pt         │
-                                                        └──────────────────┘
+   │  (exits)  │                                       │  train.pt        │
+   └───────────┘                                       │  test.pt         │
+                                                       └──────────────────┘
                                                                 │
                                               volume mounted into api container
                                                                 │
